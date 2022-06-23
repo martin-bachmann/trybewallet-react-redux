@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCurrenciesAction } from '../actions';
+import ExpenseForm from '../components/ExpenseForm';
 
 class Wallet extends React.Component {
   componentDidMount = () => {
@@ -16,6 +17,7 @@ class Wallet extends React.Component {
         <p data-testid="email-field">{ email }</p>
         <p data-testid="total-field">0</p>
         <p data-testid="header-currency-field">BRL</p>
+        <ExpenseForm />
       </header>
     );
   }
