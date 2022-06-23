@@ -1,5 +1,5 @@
 // Coloque aqui suas actions
-
+// Login actions
 export const LOGIN = 'LOGIN';
 
 export const loginAction = (email) => ({
@@ -9,11 +9,12 @@ export const loginAction = (email) => ({
   },
 });
 
-export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
+// Fetch currencies actions
+export const REQUEST_API = 'REQUEST_API';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
-export const FAILED_REQUEST_CURRENCIES = 'FAILED_REQUEST_CURRENCIES';
+export const FAILED_REQUEST = 'FAILED_REQUEST';
 
-const requestCurrenciesAction = () => ({ type: REQUEST_CURRENCIES });
+const requestAPI = () => ({ type: REQUEST_API });
 
 const sendCurrenciesAction = (currencies) => ({
   type: GET_CURRENCIES,
@@ -28,17 +29,32 @@ const getCurrenciesAction = (currencies) => (dispatch) => {
   return dispatch(sendCurrenciesAction(currenciesArray));
 };
 
-const failedRequestCurrenciesAction = (error) => ({
-  type: FAILED_REQUEST_CURRENCIES,
+const failedRequest = (error) => ({
+  type: FAILED_REQUEST,
   payload: {
     error,
   },
 });
 
 export const fetchCurrenciesAction = () => (dispatch) => {
-  dispatch(requestCurrenciesAction());
+  dispatch(requestAPI());
   return fetch('https://economia.awesomeapi.com.br/json/all')
     .then((response) => response.json())
     .then((json) => dispatch(getCurrenciesAction(json)))
-    .catch((error) => dispatch(failedRequestCurrenciesAction(error)));
+    .catch((error) => dispatch(failedRequest(error)));
+};
+
+export const GET_RATE = 'GET_RATE';
+
+const getExchangeRateAction = (exchangeRates, expense) => ({
+  type: GET_RATE,
+  payload: { newExpense: { ...expense, exchangeRates } },
+});
+
+export const saveExpenseAction = (expense) => (dispatch) => {
+  dispatch(requestAPI());
+  return fetch('https://economia.awesomeapi.com.br/json/all')
+    .then((response) => response.json())
+    .then((json) => dispatch(getExchangeRateAction(json, expense)))
+    .catch((error) => dispatch(failedRequest(error)));
 };

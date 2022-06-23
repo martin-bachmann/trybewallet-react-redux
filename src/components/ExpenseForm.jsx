@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { saveExpenseAction } from '../actions';
 
 export class ExpenseForm extends Component {
   state = {
@@ -15,6 +16,20 @@ export class ExpenseForm extends Component {
     const { name, value } = target;
     this.setState({ [name]: value });
   };
+
+  onClick = () => {
+    const { value, description, currency, method, tag } = this.state;
+    const { expenses, saveExpense } = this.props;
+    const expenseObj = { id: expenses.length, value, currency, method, tag, description };
+    saveExpense(expenseObj);
+    this.setState({
+      value: '',
+      description: '',
+      currency: '',
+      method: '',
+      tag: '',
+    });
+  }
 
   render() {
     const { currencies } = this.props;
@@ -50,7 +65,7 @@ export class ExpenseForm extends Component {
             value={ currency }
             aria-label="moeda"
           >
-            { currencies.map((c, i) => (<option value={ c } key={ i }>{c}</option>)) }
+            { currencies.map((c) => (<option value={ c } key={ c }>{c}</option>)) }
           </select>
         </label>
         <label htmlFor="method">
@@ -61,6 +76,7 @@ export class ExpenseForm extends Component {
             onChange={ this.onChange }
             value={ method }
           >
+            <option value=""> </option>
             <option value="dinheiro">Dinheiro</option>
             <option value="credito">Cartão de crédito</option>
             <option value="debito">Cartão de débito</option>
@@ -74,6 +90,7 @@ export class ExpenseForm extends Component {
             onChange={ this.onChange }
             value={ tag }
           >
+            <option value=""> </option>
             <option value="alimentacao">Alimentação</option>
             <option value="lazer">Lazer</option>
             <option value="trabalho">Trabalho</option>
@@ -81,6 +98,9 @@ export class ExpenseForm extends Component {
             <option value="saude">Saúde</option>
           </select>
         </label>
+        <button type="button" onClick={ this.onClick }>
+          Adicionar despesa
+        </button>
       </fieldset>
     );
   }
@@ -88,10 +108,17 @@ export class ExpenseForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  saveExpense: (expenseObj) => dispatch(saveExpenseAction(expenseObj)),
 });
 
 ExpenseForm.propTypes = {
+  saveExpense: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default connect(mapStateToProps, null)(ExpenseForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);

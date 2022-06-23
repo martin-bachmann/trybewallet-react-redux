@@ -1,8 +1,9 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
-  FAILED_REQUEST_CURRENCIES,
+  FAILED_REQUEST,
   GET_CURRENCIES,
-  REQUEST_CURRENCIES,
+  GET_RATE,
+  REQUEST_API,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -16,7 +17,7 @@ const INITIAL_STATE = {
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case REQUEST_CURRENCIES:
+  case REQUEST_API:
     return {
       ...state,
       isFetching: true,
@@ -27,7 +28,13 @@ const wallet = (state = INITIAL_STATE, action) => {
       isFetching: false,
       currencies: action.payload.currencies,
     };
-  case FAILED_REQUEST_CURRENCIES:
+  case GET_RATE:
+    return {
+      ...state,
+      isFetching: false,
+      expenses: [...state.expenses, action.payload.newExpense],
+    };
+  case FAILED_REQUEST:
     return {
       ...state,
       isFetching: false,
