@@ -15,8 +15,9 @@ class Wallet extends React.Component {
 
   render() {
     const { email, expenses } = this.props;
-    const expenseTotal = this.numberConverter(expenses.reduce((acc, e) => Number(this
-      .numberConverter(e.value * e.exchangeRates[e.currency].ask)) + acc, 0));
+    const expenseTotal = this.numberConverter(expenses.reduce(
+      (acc, e) => Number(e.value * e.exchangeRates[e.currency].ask) + acc, 0,
+    ));
     return (
       <header>
         <p data-testid="email-field">{ email }</p>

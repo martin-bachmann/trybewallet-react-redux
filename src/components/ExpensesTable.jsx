@@ -6,10 +6,19 @@ import { removeExpenseAction } from '../actions';
 export class ExpensesTable extends Component {
   numberConverter = (num) => Number(num).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
-  onClick = (id) => {
+  onClickDelete = (id) => {
     const { expenses, removeExpense } = this.props;
     const rmExpenses = expenses.filter((e) => e.id !== id);
     removeExpense(rmExpenses);
+  }
+
+  onClickEdit = (id) => {
+    // const { editExpense } = this.props;
+    editExpense(id);
+    // criar action para alterar
+    // alterar reducer
+    // alterar forms para função editar
+    // criar action terminar edição
   }
 
   render() {
@@ -45,9 +54,16 @@ export class ExpensesTable extends Component {
               <button
                 type="button"
                 data-testid="delete-btn"
-                onClick={ () => this.onClick(e.id) }
+                onClick={ () => this.onClickDelete(e.id) }
               >
                 Excluir
+              </button>
+              <button
+                type="button"
+                data-testid="edit-btn"
+                onClick={ () => this.onClickEdit(e.id) }
+              >
+                Editar
               </button>
             </td>
           </tr>

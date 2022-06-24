@@ -65,7 +65,9 @@ export class ExpenseForm extends Component {
             value={ currency }
             aria-label="moeda"
           >
-            { currencies.map((c) => (<option value={ c } key={ c }>{c}</option>)) }
+            { currencies.map((c) => (
+              <option value={ c } key={ c } id="currency">{c}</option>
+            )) }
           </select>
         </label>
         <label htmlFor="method">
@@ -76,10 +78,9 @@ export class ExpenseForm extends Component {
             onChange={ this.onChange }
             value={ method }
           >
-            <option value=""> </option>
-            <option value="dinheiro">Dinheiro</option>
-            <option value="credito">Cartão de crédito</option>
-            <option value="debito">Cartão de débito</option>
+            <option id="method">Dinheiro</option>
+            <option id="method">Cartão de crédito</option>
+            <option id="method">Cartão de débito</option>
           </select>
         </label>
         <label htmlFor="tag">
@@ -90,12 +91,11 @@ export class ExpenseForm extends Component {
             onChange={ this.onChange }
             value={ tag }
           >
-            <option value=""> </option>
-            <option value="alimentacao">Alimentação</option>
-            <option value="lazer">Lazer</option>
-            <option value="trabalho">Trabalho</option>
-            <option value="transporte">Transporte</option>
-            <option value="saude">Saúde</option>
+            <option id="tag">Alimentação</option>
+            <option id="tag">Lazer</option>
+            <option id="tag">Trabalho</option>
+            <option id="tag">Transporte</option>
+            <option id="tag">Saúde</option>
           </select>
         </label>
         <button type="button" onClick={ this.onClick }>
