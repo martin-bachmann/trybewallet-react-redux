@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { removeExpenseAction } from '../actions';
 
 export class ExpensesTable extends Component {
   numberConverter = (num) => Number(num).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+  onClick = (id) => {
+    const { expenses, removeExpense } = this.props;
+    const rmExpenses = expenses.filter((e) => e.id !== id);
+    removeExpense(rmExpenses);
+  }
 
   render() {
     const { expenses } = this.props;
@@ -21,7 +28,7 @@ export class ExpensesTable extends Component {
           <th>Editar/Excluir</th>
         </tr>
         { expenses.map((e) => (
-          <tr key={ e }>
+          <tr key={ e.id }>
             <td>{e.description}</td>
             <td>{e.tag}</td>
             <td>{e.method}</td>
@@ -34,6 +41,15 @@ export class ExpensesTable extends Component {
               {this.numberConverter(e.value * e.exchangeRates[e.currency].ask)}
             </td>
             <td>Real</td>
+            <td>
+              <button
+                type="button"
+                data-testid="delete-btn"
+                onClick={ () => this.onClick(e.id) }
+              >
+                Excluir
+              </button>
+            </td>
           </tr>
         ))}
       </table>
@@ -45,8 +61,13 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  removeExpense: (filteredExpenses) => dispatch(removeExpenseAction(filteredExpenses)),
+});
+
 ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(ExpensesTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

@@ -3,6 +3,7 @@ import {
   FAILED_REQUEST,
   GET_CURRENCIES,
   GET_RATE,
+  REMOVE_EXPENSE,
   REQUEST_API,
 } from '../actions';
 
@@ -33,6 +34,11 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       isFetching: false,
       expenses: [...state.expenses, action.payload.newExpense],
+    };
+  case REMOVE_EXPENSE:
+    return {
+      ...state,
+      expenses: action.payload.expenses,
     };
   case FAILED_REQUEST:
     return {

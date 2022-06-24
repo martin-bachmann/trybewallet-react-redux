@@ -11,9 +11,12 @@ class Wallet extends React.Component {
     fetchCurrencies();
   }
 
+  numberConverter = (num) => Number(num).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
   render() {
     const { email, expenses } = this.props;
-    const expenseTotal = expenses.reduce((acc, e) => Number(e.value) + acc, 0);
+    const expenseTotal = this.numberConverter(expenses.reduce((acc, e) => Number(this
+      .numberConverter(e.value * e.exchangeRates[e.currency].ask)) + acc, 0));
     return (
       <header>
         <p data-testid="email-field">{ email }</p>

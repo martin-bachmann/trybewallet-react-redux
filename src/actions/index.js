@@ -44,6 +44,7 @@ export const fetchCurrenciesAction = () => (dispatch) => {
     .catch((error) => dispatch(failedRequest(error)));
 };
 
+// Save expense actions
 export const GET_RATE = 'GET_RATE';
 
 const getExchangeRateAction = (exchangeRates, expense) => ({
@@ -58,3 +59,13 @@ export const saveExpenseAction = (expense) => (dispatch) => {
     .then((json) => dispatch(getExchangeRateAction(json, expense)))
     .catch((error) => dispatch(failedRequest(error)));
 };
+
+// Remove expense actions
+
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const removeExpenseAction = (expenses) => ({
+  type: REMOVE_EXPENSE,
+  payload: {
+    expenses,
+  },
+});
