@@ -72,6 +72,19 @@ export const removeExpenseAction = (expenses) => ({
 
 // Edit expense actions
 
+export const EDIT_START = 'EDIT_START';
+export const EDIT_END = 'EDIT_END';
+
 export const editExpenseAction = (id) => ({
-  id,
+  type: EDIT_START,
+  payload: {
+    id,
+  },
+});
+
+export const endEditExpenseAction = (expenses) => ({
+  type: EDIT_END,
+  payload: {
+    expenses,
+  },
 });

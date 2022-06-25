@@ -1,5 +1,7 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
+  EDIT_END,
+  EDIT_START,
   FAILED_REQUEST,
   GET_CURRENCIES,
   GET_RATE,
@@ -38,6 +40,19 @@ const wallet = (state = INITIAL_STATE, action) => {
   case REMOVE_EXPENSE:
     return {
       ...state,
+      expenses: action.payload.expenses,
+    };
+  case EDIT_START:
+    return {
+      ...state,
+      editor: true,
+      idToEdit: action.payload.id,
+    };
+  case EDIT_END:
+    return {
+      ...state,
+      editor: false,
+      idToEdit: 0,
       expenses: action.payload.expenses,
     };
   case FAILED_REQUEST:

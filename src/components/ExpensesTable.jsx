@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removeExpenseAction } from '../actions';
+import { editExpenseAction, removeExpenseAction } from '../actions';
 
 export class ExpensesTable extends Component {
   numberConverter = (num) => Number(num).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -15,10 +15,6 @@ export class ExpensesTable extends Component {
   onClickEdit = (id) => {
     const { editExpense } = this.props;
     editExpense(id);
-    // criar action para alterar
-    // alterar reducer
-    // alterar forms para função editar
-    // criar action terminar edição
   }
 
   render() {
