@@ -69,3 +69,9 @@ export const removeExpenseAction = (expenses) => ({
     expenses,
   },
 });
+
+// Edit expense actions
+
+export const editExpenseAction = (id) => ({
+  id,
+});

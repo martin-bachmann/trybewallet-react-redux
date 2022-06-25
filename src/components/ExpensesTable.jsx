@@ -13,7 +13,7 @@ export class ExpensesTable extends Component {
   }
 
   onClickEdit = (id) => {
-    // const { editExpense } = this.props;
+    const { editExpense } = this.props;
     editExpense(id);
     // criar action para alterar
     // alterar reducer
@@ -53,17 +53,17 @@ export class ExpensesTable extends Component {
             <td>
               <button
                 type="button"
-                data-testid="delete-btn"
-                onClick={ () => this.onClickDelete(e.id) }
-              >
-                Excluir
-              </button>
-              <button
-                type="button"
                 data-testid="edit-btn"
                 onClick={ () => this.onClickEdit(e.id) }
               >
                 Editar
+              </button>
+              <button
+                type="button"
+                data-testid="delete-btn"
+                onClick={ () => this.onClickDelete(e.id) }
+              >
+                Excluir
               </button>
             </td>
           </tr>
@@ -79,9 +79,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeExpense: (filteredExpenses) => dispatch(removeExpenseAction(filteredExpenses)),
+  editExpense: (id) => dispatch(editExpenseAction(id)),
 });
 
 ExpensesTable.propTypes = {
+  editExpense: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeExpense: PropTypes.func.isRequired,
 };
