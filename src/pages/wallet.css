@@ -1,0 +1,108 @@
+.body {
+  background-color: green;
+  height: 100vh;
+  width: 100vw;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.wallet-title {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5em;
+  gap: 15px;
+  justify-content: center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  width: 100%;
+}
+
+.logo {
+  width: 100px;
+}
+
+.info-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.info-text {
+  color: white;
+  font-size: 1em;
+  margin: 20px;
+}
+
+.form-container {
+  align-items: center;
+  background-color: rgb(17, 63, 17);
+  border: rgb(17, 63, 17);
+  color: white;
+  display: flex;
+  font-size: 1.2em;
+  justify-content: space-evenly;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  width: 100%;
+}
+
+.wallet-input {
+  background-color: white;
+  border: 0;
+  border-radius: 4px;
+  color: rgb(56, 56, 56);
+}
+
+.form-button {
+  background-color: white;
+  border: 0;
+  border-radius: 4px;
+  color: rgb(56, 56, 56);
+  font-size: 0.8em;
+  padding: 3px;
+}
+
+.table-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.table-container tr {
+  align-items: center;
+  border-bottom: white solid 1px;
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.table-container tr td {
+  text-align: center;
+  width: 8%;
+}
+
+.table-container tr th {
+  text-align: center;
+  width: 8%;
+}
+
+.table-button {
+  background-color: white;
+  border: 0;
+  border-radius: 4px;
+  color: rgb(56, 56, 56);
+  font-size: 0.8em;
+  margin: 3px;
+  padding: 3px;
+}

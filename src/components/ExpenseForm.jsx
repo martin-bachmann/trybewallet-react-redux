@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { endEditExpenseAction, saveExpenseAction } from '../actions';
 
+const ALIMENTACAO = 'Alimentação';
+
 export class ExpenseForm extends Component {
   state = {
     value: '',
     description: '',
-    currency: '',
-    method: '',
-    tag: '',
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: ALIMENTACAO,
   }
 
   onChange = ({ target }) => {
@@ -25,9 +27,9 @@ export class ExpenseForm extends Component {
     this.setState({
       value: '',
       description: '',
-      currency: '',
-      method: '',
-      tag: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: ALIMENTACAO,
     });
   }
 
@@ -37,15 +39,13 @@ export class ExpenseForm extends Component {
    const expenseObj = { id: idToEdit, value, currency, method, tag, description };
    const filteredExpenses = expenses.map((e) => (e.id === idToEdit
      ? { ...expenseObj, exchangeRates: e.exchangeRates } : e));
-   console.log(expenseObj);
-   console.log(filteredExpenses);
    endEditExpense(filteredExpenses);
    this.setState({
      value: '',
      description: '',
-     currency: '',
-     method: '',
-     tag: '',
+     currency: 'USD',
+     method: 'Dinheiro',
+     tag: ALIMENTACAO,
    });
  }
 
@@ -53,10 +53,11 @@ export class ExpenseForm extends Component {
    const { currencies, editor } = this.props;
    const { value, description, currency, method, tag } = this.state;
    return (
-     <fieldset>
+     <fieldset className="form-container">
        <label htmlFor="value">
          { 'Valor: '}
          <input
+           className="wallet-input"
            type="number"
            name="value"
            value={ value }
@@ -67,6 +68,7 @@ export class ExpenseForm extends Component {
        <label htmlFor="description">
          { 'Descrição: '}
          <input
+           className="wallet-input"
            type="text"
            name="description"
            value={ description }
@@ -77,6 +79,7 @@ export class ExpenseForm extends Component {
        <label htmlFor="currency">
          { 'Moeda: '}
          <select
+           className="wallet-input"
            name="currency"
            data-testid="currencies-input"
            onChange={ this.onChange }
@@ -91,6 +94,7 @@ export class ExpenseForm extends Component {
        <label htmlFor="method">
          { 'Método de pagamento: '}
          <select
+           className="wallet-input"
            name="method"
            data-testid="method-input"
            onChange={ this.onChange }
@@ -104,6 +108,7 @@ export class ExpenseForm extends Component {
        <label htmlFor="tag">
          { 'Categoria: '}
          <select
+           className="wallet-input"
            name="tag"
            data-testid="tag-input"
            onChange={ this.onChange }
@@ -120,6 +125,7 @@ export class ExpenseForm extends Component {
          editor
            ? (
              <button
+               className="form-button"
                type="button"
                onClick={ this.onClickEditExpense }
              >
@@ -127,7 +133,11 @@ export class ExpenseForm extends Component {
              </button>
            )
            : (
-             <button type="button" onClick={ this.onClickNewExpense }>
+             <button
+               className="form-button"
+               type="button"
+               onClick={ this.onClickNewExpense }
+             >
                Adicionar despesa
              </button>
            )

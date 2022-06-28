@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchCurrenciesAction } from '../actions';
 import ExpenseForm from '../components/ExpenseForm';
 import ExpensesTable from '../components/ExpensesTable';
+import './wallet.css';
 
 class Wallet extends React.Component {
   componentDidMount = () => {
@@ -19,13 +20,29 @@ class Wallet extends React.Component {
       (acc, e) => Number(e.value * e.exchangeRates[e.currency].ask) + acc, 0,
     ));
     return (
-      <header>
-        <p data-testid="email-field">{ email }</p>
-        <p data-testid="total-field">{ expenseTotal }</p>
-        <p data-testid="header-currency-field">BRL</p>
-        <ExpenseForm />
-        <ExpensesTable />
-      </header>
+      <div className="body">
+        <header className="header">
+          <div className="wallet-title">
+            <h1>TrybeWallet</h1>
+            <img src="wallet_image.png" alt="Wallet logo" className="logo" />
+          </div>
+          <div className="info-container">
+            <p className="info-text">
+              {'Email: '}
+              <span data-testid="email-field">{ email }</span>
+            </p>
+            <p className="info-text">
+              {'Despesa Total: '}
+              <span data-testid="total-field">{ expenseTotal }</span>
+            </p>
+            <p className="info-text" data-testid="header-currency-field">BRL</p>
+          </div>
+          <ExpenseForm />
+        </header>
+        <main>
+          <ExpensesTable />
+        </main>
+      </div>
     );
   }
 }
