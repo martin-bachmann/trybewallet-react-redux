@@ -1,5 +1,5 @@
 .body {
-  background-color: green;
+  background-color: rgb(51, 65, 51);
   height: 100vh;
   width: 100vw;
 }
@@ -13,11 +13,13 @@
 .wallet-title {
   align-items: center;
   background-color: white;
+  box-shadow: 0 0 3px 1px black;
   display: flex;
   flex-direction: row;
   font-size: 1.5em;
   gap: 15px;
   justify-content: center;
+  margin-top: 15px;
   padding-bottom: 15px;
   padding-top: 15px;
   width: 100%;
@@ -41,8 +43,9 @@
 
 .form-container {
   align-items: center;
-  background-color: rgb(17, 63, 17);
+  background-color: rgb(46, 95, 46);
   border: rgb(17, 63, 17);
+  box-shadow: 0 0 1px 1px black;
   color: white;
   display: flex;
   font-size: 1.2em;

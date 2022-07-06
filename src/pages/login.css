@@ -1,11 +1,20 @@
+.body-login {
+  align-items: center;
+  background-color: rgb(51, 65, 51);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
 .login-container {
   align-items: center;
-  border: 1px rgb(59, 57, 57) solid;
+  background-color: white;
+  border: 1px solid white;
   border-radius: 20px;
+  box-shadow: 0 0 3px 2px black;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  margin-top: 80px;
   padding: 25px;
   width: 300px;
 }
@@ -30,7 +39,7 @@
 }
 
 .login-button {
-  background-color: green;
+  background-color: rgb(46, 95, 46);
   border-radius: 5px;
   color: white;
   font-size: 1.5em;

@@ -4,21 +4,23 @@ import PropTypes from 'prop-types';
 import { editExpenseAction, removeExpenseAction } from '../actions';
 
 export class ExpensesTable extends Component {
-  numberConverter = (num) => Number(num).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  numberConverter = (num) => Number(num)
+    .toFixed(2)
+    .replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
   onClickDelete = (id) => {
     const { expenses, removeExpense } = this.props;
     const rmExpenses = expenses.filter((e) => e.id !== id);
     removeExpense(rmExpenses);
-  }
+  };
 
   onClickEdit = (id) => {
     const { editExpense } = this.props;
     editExpense(id);
-  }
+  };
 
   render() {
-    const { expenses } = this.props;
+    const { editor, expenses } = this.props;
     return (
       <table className="table-container">
         <tr>
@@ -32,16 +34,14 @@ export class ExpensesTable extends Component {
           <th>Moeda de conversão</th>
           <th>Editar/Excluir</th>
         </tr>
-        { expenses.map((e) => (
+        {expenses.map((e) => (
           <tr key={ e.id }>
             <td>{e.description}</td>
             <td>{e.tag}</td>
             <td>{e.method}</td>
-            <td>{this.numberConverter(e.value) }</td>
+            <td>{this.numberConverter(e.value)}</td>
             <td>{e.exchangeRates[e.currency].name.split('/')[0]}</td>
-            <td>
-              {this.numberConverter(e.exchangeRates[e.currency].ask)}
-            </td>
+            <td>{this.numberConverter(e.exchangeRates[e.currency].ask)}</td>
             <td>
               {this.numberConverter(e.value * e.exchangeRates[e.currency].ask)}
             </td>
@@ -51,6 +51,7 @@ export class ExpensesTable extends Component {
                 type="button"
                 data-testid="edit-btn"
                 className="table-button"
+                disabled={ editor }
                 onClick={ () => this.onClickEdit(e.id) }
               >
                 Editar
@@ -72,6 +73,7 @@ export class ExpensesTable extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  editor: state.wallet.editor,
   expenses: state.wallet.expenses,
 });
 
@@ -82,6 +84,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 ExpensesTable.propTypes = {
   editExpense: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeExpense: PropTypes.func.isRequired,
 };
