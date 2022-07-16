@@ -5,7 +5,7 @@ Aplicação que cria uma carteira com conversor de moedas, possibilitando adicio
 Confira aqui o [site](https://trybewallet-react-redux.vercel.app) em funcionamento!
 
 ## Resultado final
-![trybeWallet_deploy]()
+![trybeWallet_deploy](https://github.com/martin-bachmann/trybewallet-react-redux/blob/main/public/trybeWallet_deploy.gif?raw=true)
 
 ## Técnologias usadas
 <p align="left">
