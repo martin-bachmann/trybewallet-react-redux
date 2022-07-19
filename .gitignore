@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .vscode
+
+publisher.sh
+trybe-filter-repo.sh
